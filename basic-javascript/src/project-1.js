@@ -1,5 +1,12 @@
 /* eslint-disable arrow-parens */
 
+/* SKIPPED    */
+/* THIS       */
+/* PORTION    */
+/* OF         */
+/* THE        */
+/* ASSIGNMENT */
+
 const multiplyByTen = num => {
   return num * 10;
 };
@@ -137,5 +144,5 @@ module.exports = {
   getRectangleArea,
   getTriangleArea,
   getCircleArea,
-  getRectangularPrismVolume
+  getRectangularPrismVolume,
 };

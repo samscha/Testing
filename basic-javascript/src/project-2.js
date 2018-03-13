@@ -1,5 +1,12 @@
 /* eslint-disable arrow-parens */
 
+/* SKIPPED    */
+/* THIS       */
+/* PORTION    */
+/* OF         */
+/* THE        */
+/* ASSIGNMENT */
+
 const getBiggest = (x, y) => {
   if (x > y) {
     return x;
@@ -167,5 +174,5 @@ module.exports = {
   contains,
   addNumbers,
   averageTestScore,
-  largestNumber
+  largestNumber,
 };
