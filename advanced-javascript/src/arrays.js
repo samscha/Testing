@@ -13,7 +13,7 @@ const map = (elements, cb) => {
 };
 
 const reduce = (elements, cb, memo = elements.shift()) => {
-  each((element, item) => {
+  each(elements, item => {
     memo = cb(memo, item);
   });
   return memo;
@@ -28,20 +28,20 @@ const find = (elements, cb) => {
 
 const filter = (elements, cb) => {
   const filteredValues = [];
-  each((element, item) => {
+  each(elements, item => {
     if (cb(item)) filteredValues.push(item);
   });
   return filteredValues;
 };
 
-const flatten = (elements) => {
+const flatten = elements => {
   const flattenedArr = reduce(
     elements,
     (memo, item) => {
       if (Array.isArray(item)) return memo.concat(flatten(item));
       return memo.concat(item);
     },
-    []
+    [],
   );
   return flattenedArr;
 };
@@ -54,5 +54,5 @@ module.exports = {
   reduce,
   find,
   filter,
-  flatten
+  flatten,
 };

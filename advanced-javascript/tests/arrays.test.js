@@ -18,45 +18,165 @@ chai.use(sinonChai);
 
 describe('Arrays', () => {
   describe('`each`', () => {
+    const each = arrayFunctions.each;
+
     it('should be a function', () => {
-      const each = arrayFunctions.each;
-      expect(each).to.be.a('string');
+      expect(each).to.be.a('function');
     });
-    // begin here
+
+    it('should invoke cb on each array element', () => {
+      const cb = sinon.spy();
+      const arr = [1, 2, 3];
+
+      each(arr, cb);
+
+      expect(cb).have.callCount(arr.length);
+    });
+
+    it('should pass the element and the index to cb', () => {
+      const cb = sinon.spy();
+      const arr = [4, 5, 6];
+
+      each(arr, cb);
+
+      let i = 0;
+      expect(cb.getCall(i)).have.been.calledWithExactly(arr[i], i);
+      i = 1;
+      expect(cb.getCall(i)).have.been.calledWithExactly(arr[i], i);
+      i = 2;
+      expect(cb.getCall(i)).have.been.calledWithExactly(arr[i], i);
+    });
   });
 
   describe('`map`', () => {
+    const map = arrayFunctions.map;
+
     it('should be a function', () => {
-      const map = arrayFunctions.map;
-      expect(map).to.be.an('object');
+      expect(map).to.be.an('function');
+    });
+
+    it('should return an array', () => {
+      const arr = [];
+
+      expect(map(arr, _ => _)).to.be.an('array');
+    });
+
+    it('should pass each item into the transform function', () => {
+      const arr = [1, 2, 3];
+
+      expect(map(arr, e => e * 10)).to.have.ordered.members([10, 20, 30]);
+    });
+
+    it('should call the callback passed to it for each element in array given', () => {
+      const cb = sinon.spy();
+      const arr = [4, 5, 6];
+
+      map(arr, cb);
+
+      expect(cb).have.callCount(arr.length);
     });
   });
 
   describe('`reduce`', () => {
+    const reduce = arrayFunctions.reduce;
+
     it('should be a function', () => {
-      const reduce = arrayFunctions.reduce;
-      expect(reduce).to.be.a('number');
+      expect(reduce).to.be.a('function');
+    });
+
+    it("should reduce the array's contents to a single value", () => {
+      expect(reduce([], _ => _, 0)).to.be.a('number');
+    });
+
+    it('should return the correct answer', () => {
+      const arr = [1, 2, 3, 4];
+
+      expect(reduce(arr, (s, e) => s + e)).equal(10);
+    });
+
+    it('should return the correct answer with initial value', () => {
+      const arr = [1, 2, 3, 4];
+
+      expect(reduce(arr, (s, e) => s + e, 2)).equal(12);
     });
   });
 
   describe('`find`', () => {
+    const find = arrayFunctions.find;
+
     it('should be a function', () => {
-      const find = arrayFunctions.find;
-      expect(find).to.be.an('array');
+      expect(find).to.be.an('function');
+    });
+
+    it('should return the first element that passes the truth test', () => {
+      const arr = [1, 2, 3];
+
+      expect(find(arr, n => n === 3)).equal(3);
+    });
+
+    it('should return undefined if not found', () => {
+      const arr = [4, 5, 6];
+
+      expect(find(arr, n => n === 7)).equal(undefined);
     });
   });
 
   describe('`filter`', () => {
+    const filter = arrayFunctions.filter;
+
     it('should be a function', () => {
-      const filter = arrayFunctions.filter;
-      expect(filter).to.be.a('null');
+      expect(filter).to.be.a('function');
+    });
+
+    it('should return an array', () => {
+      const arr = [1, 2, 3];
+
+      expect(filter([], _ => _)).to.be.a('array');
+    });
+
+    it('should return an empty array if no elements pass truth test', () => {
+      const arr = [4, 5, 6];
+      const res = filter(arr, num => num === 10);
+
+      expect(res).to.be.an('array');
+      expect(res.length).equal(0);
+    });
+
+    it('should return an array with all elements that pass truth test', () => {
+      const arr = [7, 8, 9];
+      const res = filter(arr, n => n > 7);
+
+      expect(res).to.be.an('array');
+      expect(res.length).equal(2);
     });
   });
 
   describe('`flatten`', () => {
+    const flatten = arrayFunctions.flatten;
+
     it('should be a function', () => {
-      const flatten = arrayFunctions.flatten;
-      expect(flatten).to.be.a('promise');
+      expect(flatten).to.be.a('function');
+    });
+
+    it('should return an array', () => {
+      const arr = [1, 2, 3];
+
+      expect(flatten([], _ => _)).to.be.a('array');
+    });
+
+    it('should return a flattened array when given a nested array', () => {
+      const arr = [1, 2, 3, 4, 5, [6], [7]];
+      const res = flatten(arr);
+
+      expect(res).to.be.an('array');
+      expect(res).to.have.ordered.members([1, 2, 3, 4, 5, 6, 7]);
+    });
+
+    it('should return a flattened array regardless of how deep the array nesting is', () => {
+      const arr = [1, [2], [[3]], [[[4]]]];
+
+      const res = flatten(arr);
+      expect(res).to.have.ordered.members([1, 2, 3, 4]);
     });
   });
 });
