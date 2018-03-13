@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js run watch project-1.test.js
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js test basic-javascript/tests/project-1.test.js
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/mysql/bin/:/usr/local/mysql/bin/
@@ -1626,7 +1626,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c mocha -R nyan --watch project-1.test.js
+  Arguments: -c eslint */tests/*.js && eslint */src/*.js && mocha -R nyan basic-javascript/tests/project-1.test.js
   Directory: /Users/SamuelCha/Documents/Lambda School/13/Testing
   Output:
   

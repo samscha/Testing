@@ -1,4 +1,4 @@
-/* eslint-disable prefer-destructuring */
+/* eslint-disable */
 
 const chai = require('chai');
 const sinon = require('sinon');
