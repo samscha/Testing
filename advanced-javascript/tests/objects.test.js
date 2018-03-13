@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const assert = require('chai').expect;
 const objectFunctions = require('../src/objects');
 
