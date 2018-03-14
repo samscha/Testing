@@ -10,6 +10,13 @@ const funcs = require('../src/project-1');
 // hint 1. - you need to pass data to the functions and get expected output.
 // hint 2. - you should test to see if the expected return output is of a specified type, as well as the correct outcome.
 
+/* SKIPPED    */
+/* THIS       */
+/* PORTION    */
+/* OF         */
+/* THE        */
+/* ASSIGNMENT */
+
 describe('Project-1 Functions', () => {
   describe('`multiplyByTen`', () => {
     it('should be a function', () => {
